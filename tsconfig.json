@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es5",                          
+    "module": "commonjs",                     
+    "lib": [
+      "dom",
+      "es6",
+      "es7",
+      "es2015"
+    ],         
+    "outDir": "./dist/",                    
+    "jsx": "react",
+    "strict": true,                            
+    "baseUrl": "./",                       
+    "experimentalDecorators": true,        
+    "emitDecoratorMetadata": true,         
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
