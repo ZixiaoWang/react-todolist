@@ -2,31 +2,143 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css"/>
+    <title>React Todo List</title>
   </head>
   <body>
-    <h1>This is the title</h1>
-    <hr/>
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-          <ul></ul>
-          <li>0</li>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-          <li>4</li>
+    <header class="header">
+      <h1>React Todolist</h1>
+    </header>
+    <div class="section">
+      <div class="panel search-container">
+        <input type="text" placehold="Search anything" class="search-input"/>
+      </div>
+    </div>
+    <div class="section">
+      <div class="panel"><span class="large-txt">29 Mar 2018</span></div>
+    </div>
+    <div class="section flex-full">
+      <div class="calendar-container">
+        <div id="calendar" class="calendar-body">
+                    <div class="month">
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                    </div>
+                    <div class="month">
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                    </div>
+                    <div class="month">
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                      <div class="day"></div>
+                    </div>
         </div>
       </div>
+      <div id="memolist" class="memolist"></div>
     </div>
-    <div class="card-container">
-      <div class="card-header">This is the title</div>
-      <div class="card-panel">
-        <p>This is the card panel </p>
-      </div>
-      <div class="card-footer"><span>Copyright</span></div>
-    </div>
+    <footer class="footer">
+      <p>This is a ReactJS demo app. build by <a href="mailto:jacky.wang@gotalents.net">Jacky Wang</a></p>
+    </footer>
   </body>
 </html>
