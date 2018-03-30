@@ -1,0 +1,27 @@
+:root{
+    --header-height: 45px;
+    --urgent: #ed1b2e;
+    --yellow: orange;
+    --green: green;
+    --blue: skyblue;
+    --purple: purple;
+}
+
+.txt-ga{ font-size: 40px; }
+.txt-xl{ font-size: 32px; }
+.txt-lg{ font-size: 22px; }
+.txt-md{ font-size: 18px; }
+.txt-sm{ font-size: 14px; }
+.txt-xs{ font-size: 11px; }
+.txt-ti{ font-size: 8px; }
+
+.grey-5{ color: #333; }
+.grey-4{ color: #666; }
+.grey-3{ color: #999; }
+.grey-2{ color: #ccc; }
+.grey-1{ color: #eee; }
+.urgent{ color: var(--urgent) }
+.yellow{ color: var(--yellow) }
+.green{ color: var(--green) }
+.blue{ color: var(--blue) }
+.purple{ color: var(--purple) }
