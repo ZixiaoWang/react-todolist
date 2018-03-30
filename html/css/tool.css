@@ -1,5 +1,8 @@
 :root{
     --header-height: 45px;
+    --input-height: 30px;
+    --title-height: 20px;
+
     --urgent: #ed1b2e;
     --yellow: orange;
     --green: green;
@@ -25,3 +28,5 @@
 .green{ color: var(--green) }
 .blue{ color: var(--blue) }
 .purple{ color: var(--purple) }
+
+.noshadow{ box-shadow: none; }

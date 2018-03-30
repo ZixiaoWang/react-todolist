@@ -10,140 +10,137 @@
     <title>React Todo List</title>
   </head>
   <body>
-    <header>
-      <div class="section">
-        <div class="header"><strong class="txt-xl"><span class="yellow">M</span><span class="green">E</span><span class="blue">M</span><span class="urgent">O</span></strong>
-          <div class="header-btn-group"><i class="header-btn material-icons">search</i><i class="header-btn material-icons">view_module</i><i class="header-btn material-icons">add_circle_outline</i></div>
-        </div>
-      </div>
-    </header>
-    <div class="body">
-      <div class="grid-container">
-        <div class="grid-head">
-          <div class="cell full-col">
-            <div><span class="txt-lg">March</span><span>&nbsp;</span><span class="txt-sm grey-4">2018</span></div>
+    <div id="app">
+      <header>
+        <div class="section">
+          <div class="header"><strong class="txt-xl"><span class="yellow">M</span><span class="green">E</span><span class="blue">M</span><span class="urgent">O</span></strong>
+            <div class="header-btn-group"><i class="header-btn material-icons">search</i><i class="header-btn material-icons">view_module</i><i class="header-btn material-icons">add_circle_outline</i></div>
           </div>
-          <div class="cell">Sun</div>
-          <div class="cell">Mon</div>
-          <div class="cell">Tue</div>
-          <div class="cell">Wed</div>
-          <div class="cell">Thu</div>
-          <div class="cell">Fri</div>
-          <div class="cell">Sat</div>
         </div>
-        <div class="grid-body"><strong class="cell">
-            <div class="txt-md">1</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">2</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">3</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">4</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">5</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">6</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">7</div>
-            <div class="cell-event blue"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">8</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">9</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">10</div>
-            <div class="cell-event purple"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">11</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">12</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">13</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">14</div>
-            <div class="cell-event blue"></div>
-            <div class="cell-event urgent"></div></strong><strong class="cell">
-            <div class="txt-md">15</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">16</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">17</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">18</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">19</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">20</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">21</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">22</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">23</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">24</div>
-            <div class="cell-event urgent"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">25</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">26</div>
-            <div class="cell-event blue"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">27</div>
-            <div class="cell-event"></div>
-            <div class="cell-event urgent"></div></strong><strong class="cell">
-            <div class="txt-md">28</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">29</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">30</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md">31</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md grey-2">1</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md grey-2">2</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md grey-2">3</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong><strong class="cell">
-            <div class="txt-md grey-2">4</div>
-            <div class="cell-event"></div>
-            <div class="cell-event"></div></strong>
+      </header>
+      <div class="body">
+        <div class="grid-container">
+          <div class="grid-head">
+            <div class="cell full-col month-header">
+              <div><span class="txt-lg">March</span><span>&nbsp;</span><span class="txt-sm grey-4">2018</span></div>
+            </div>
+            <div class="cell">Sun</div>
+            <div class="cell">Mon</div>
+            <div class="cell">Tue</div>
+            <div class="cell">Wed</div>
+            <div class="cell">Thu</div>
+            <div class="cell">Fri</div>
+            <div class="cell">Sat</div>
+          </div>
+          <div class="grid-body"><strong class="cell">
+              <div class="txt-md">1</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">2</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">3</div>
+              <div class="cell-event green"></div>
+              <div class="cell-event blue"></div></strong><strong class="cell">
+              <div class="txt-md">4</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">5</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">6</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">7</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">8</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">9</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">10</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">11</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">12</div>
+              <div class="cell-event green"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">13</div>
+              <div class="cell-event blue"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">14</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">15</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">16</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">17</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">18</div>
+              <div class="cell-event"></div>
+              <div class="cell-event blue"></div></strong><strong class="cell">
+              <div class="txt-md">19</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">20</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">21</div>
+              <div class="cell-event urgent"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">22</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">23</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">24</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">25</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">26</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">27</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">28</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">29</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">30</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md">31</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md grey-2">1</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md grey-2">2</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md grey-2">3</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong><strong class="cell">
+              <div class="txt-md grey-2">4</div>
+              <div class="cell-event"></div>
+              <div class="cell-event"></div></strong>
+          </div>
         </div>
       </div>
     </div>
-    <footer>
-      <div class="section">
-        <div class="txt-xs">This is a ReactJS demo app. build by <a href="mailto:jacky.wang@gotalents.net">Jacky Wang</a></div>
-      </div>
-    </footer>
   </body>
 </html>
