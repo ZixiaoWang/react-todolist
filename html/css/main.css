@@ -134,6 +134,10 @@ header{
 .cell.month-header {
     padding: 15px 10px;
 }
+.cell.inactive{
+    background-color: #eee;
+    opacity: 0.7;
+}
 .cell > .cell-event{
     width: 100%;
     height: 7px;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { render } from 'react-dom';
-import { AppComponent } from './app';
+import { AppComponent } from './pages/app';
 
 render(
     <AppComponent />,
