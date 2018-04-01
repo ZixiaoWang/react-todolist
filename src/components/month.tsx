@@ -44,7 +44,18 @@ export class Cell extends Component {
 export class Month extends Component {
 
     public state: any;
-    private weekdays: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    private months: any = {
+        "1": 'Jan', "2": 'Feb',
+        "3": 'Mar', "4": 'Apr',
+        "5": 'May', "6": 'Jun',
+        "7": 'Jul', "8": 'Aug',
+        "9": 'Sep', "10": 'Oct',
+        "11": 'Nov',"12": 'Dec'
+    }
+    private weekdays: string[] = [
+        'Sun', 'Mon', 'Tue', 'Wed', 
+        'Thu', 'Fri', 'Sat'
+    ];
 
     constructor(public props: any) {
         super(props);
@@ -56,11 +67,13 @@ export class Month extends Component {
             return <div key={ index } className="cell">{ day }</div>
         });
 
+        let month = this.months[this.props.month];
+
         return (
             <div className="grid-head">
                 <div className="cell full-col month-header">
                     <div>
-                        <span className="txt-lg">{ this.props.month }</span>
+                        <span className="txt-lg">{ month }</span>
                         <span>&nbsp;</span>
                         <span className="txt-sm grey-4">{ this.props.year }</span>
                     </div>
@@ -70,13 +83,28 @@ export class Month extends Component {
         )
     }
 
+    renderCalendar(): JSX.Element{
+
+        let cells = [];
+
+        for(let i=1; i<=35; i++) {
+            cells.push(
+                <Cell key={i} date={i} inactive={false} events={[]}></Cell>
+            )
+        }
+
+        return (
+            <div className="grid-body">
+                { cells }
+            </div>
+        )
+    }
+
     render() {
         return (
             <div className="grid-container">
                 { this.renderHeader() }
-                <div className="grid-body">
-
-                </div>
+                { this.renderCalendar() }
             </div>
         )
     }

@@ -3,6 +3,7 @@ import { Component } from 'react';
 
 import { Nav } from '../components/nav';
 import { Month } from '../components/month';
+import { List } from '../components/list';
 
 export class AppComponent extends Component<{}> {
 
@@ -14,7 +15,8 @@ export class AppComponent extends Component<{}> {
         return (
             <div id="app">
                 <Nav />
-                <Month year="2018" month="March"/>
+                <Month year="2018" month="3"/>
+                {/* <List /> */}
             </div>
         )
     }
