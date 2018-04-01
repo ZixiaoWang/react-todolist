@@ -10,7 +10,7 @@ export class ListItem extends Component {
 
     private event: memo;
 
-    constructor(public props: any) {
+    constructor(public props: ListItemProps) {
         super(props);
         this.event = this.props.event;
     }
