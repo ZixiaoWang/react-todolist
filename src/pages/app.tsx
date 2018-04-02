@@ -5,6 +5,7 @@ import { BrowserRouter, Link, Route, Switch, Redirect } from 'react-router-dom'
 import { GridPage } from './grid';
 import { ListPage } from './list';
 import { DetailPage } from './detail';
+import { SearchPage } from './search';
 
 export class Home extends Component<{}> {
 
@@ -36,6 +37,7 @@ export class AppComponent extends Component {
             <BrowserRouter>
                 <Switch>
                     <Route path="/edit/:timestamp" component={ DetailPage } />
+                    <Route path="/search" component={ SearchPage } />
                     <Route path="/" component={ Home } />
                     <Redirect to="/" />
                 </Switch>

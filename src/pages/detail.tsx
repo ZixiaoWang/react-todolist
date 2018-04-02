@@ -11,6 +11,20 @@ export class DetailPage extends Component {
         this.timestamp = this.props.match.params.timestamp || Date.now();
     }
 
+    componentWillMount() {
+        let protocol = location.protocol;
+        let host = location.host;
+        let regex = new RegExp(protocol + '//' + host + '/(grid|list)');
+
+        if(regex.test(document.referrer) === false) {
+            location.replace('/grid');
+        }
+    }
+
+    back() {
+        history.back();
+    }
+
     render() {
         return (
             <div id="app">
@@ -18,9 +32,9 @@ export class DetailPage extends Component {
                     <div className="section">
                         {/* HEADER */}
                         <div className="header">
-                            <div className="header-btn-group">
+                            <div className="header-btn-group" onClick={ this.back.bind(this) }>
                                 <i className="header-btn material-icons">arrow_back</i>
-                                <span className="header-txt txt-lg">Back</span>
+                                <span className="header-btn txt-lg">Back</span>
                             </div>
                             <div className="header-btn-group">
                                 <i className="header-btn material-icons">delete</i>
