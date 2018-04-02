@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Component } from 'react';
 import { BrowserRouter, Link, Route, Switch, Redirect } from 'react-router-dom'
 
-import { Nav } from '../components/nav';
-import { Month } from '../components/month';
-import { List } from '../components/list';
+import { GridPage } from './grid';
+import { ListPage } from './list';
+import { DetailPage } from './detail';
 
 export class Home extends Component<{}> {
 
@@ -15,14 +15,11 @@ export class Home extends Component<{}> {
     render() {
         return (
             <BrowserRouter basename="/">
-                <div id="app">
-                    <Nav />
-                    <Switch>
-                        <Redirect exact from="/" to="/grid" />
-                        <Route path="/list" component={ List } />
-                        <Route path="/grid" component={ Month } />
-                    </Switch>
-                </div>
+                <Switch>
+                    <Route path="/list" component={ ListPage } />
+                    <Route path="/grid" component={ GridPage } />
+                    <Redirect to="/grid" />
+                </Switch>
             </BrowserRouter>
         )
     }
@@ -38,8 +35,9 @@ export class AppComponent extends Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    {/* <Route path="/edit" component={  } /> */}
+                    <Route path="/edit/:timestamp" component={ DetailPage } />
                     <Route path="/" component={ Home } />
+                    <Redirect to="/" />
                 </Switch>
             </BrowserRouter>
         )

@@ -3,13 +3,19 @@ import { Component } from 'react';
 
 export class Logo extends Component {
     
+    goToHome(): void{
+        location.href = '/grid';
+    }
+
     render() {
         return (
-            <strong className="txt-xl">
-                <span className="yellow">M</span>
-                <span className="green">E</span>
-                <span className="blue">M</span>
-                <span className="urgent">O</span>
+            <strong 
+                className="txt-xl" 
+                onClick={ this.goToHome }>
+                    <span className="yellow">M</span>
+                    <span className="green">E</span>
+                    <span className="blue">M</span>
+                    <span className="urgent">O</span>
             </strong>
         )
     }
@@ -46,17 +52,38 @@ export class NavButton extends Component {
     render() {
         return (
             <i  className="header-btn material-icons"
+                onClick={ this.props.onClick }
                 style={ this.state }
-                >{ this.props.icon }
-            </i>
+                >{ this.props.icon }</i>
         )
     }
 }
 
 export class Nav extends Component {
 
+    private icon: string;
+
     constructor(public props: any) {
         super(props);
+        this.icon = this.props.icon || 'view_list';
+    }
+
+    gotoSearch(): void {
+        location.href = '/search';
+    }
+
+    toggleView(): void {
+        let href = '/list';
+        if(this.icon === 'view_module') {
+            href = '/grid';
+        }
+        location.href = href;
+    }
+
+    gotoEditPage(): void {
+        let timestamp = Date.now();
+        let href = '/edit/' + timestamp.toString();
+        location.href = href;
     }
 
     render() {
@@ -66,9 +93,9 @@ export class Nav extends Component {
                     <div className="header">
                         <Logo />
                         <NavButtonGroup>
-                            <NavButton icon="search" onClick=""/>
-                            <NavButton icon="view_module" onClick=""/>
-                            <NavButton icon="add_circle_outline" onClick=""/>
+                            <NavButton icon="search" onClick={ this.gotoSearch }/>
+                            <NavButton icon={ this.icon } onClick={ this.toggleView.bind(this) } />
+                            <NavButton icon="add_circle_outline" onClick={ this.gotoEditPage } />
                         </NavButtonGroup>
                     </div>
                 </div>

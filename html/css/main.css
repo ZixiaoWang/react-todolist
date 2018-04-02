@@ -37,6 +37,10 @@ header{
     margin-left: 30px;
     font-size: 18px;
 }
+.header > .header-btn-group > .header-txt {
+    line-height: var(--header-height);
+    padding: 0px 10px;
+}
 .header .header-btn{
     display: inline-block;
     text-align: center;
