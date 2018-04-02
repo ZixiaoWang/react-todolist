@@ -1,0 +1,8 @@
+{
+    "server": {
+        "files": [
+            "./html/css/*.css"
+        ],
+        "baseDir": "./public"
+    }
+}

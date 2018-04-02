@@ -56,9 +56,15 @@ export class Month extends Component {
         'Sun', 'Mon', 'Tue', 'Wed', 
         'Thu', 'Fri', 'Sat'
     ];
+    private year: number;
+    private month: number;
 
     constructor(public props: any) {
         super(props);
+
+        let date = new Date();
+        this.year = this.props.year || date.getFullYear();
+        this.month = this.props.month || date.getMonth();
     }
 
     renderHeader(): JSX.Element {
@@ -67,7 +73,7 @@ export class Month extends Component {
             return <div key={ index } className="cell">{ day }</div>
         });
 
-        let month = this.months[this.props.month];
+        let month = this.months[this.month];
 
         return (
             <div className="grid-head">
@@ -75,7 +81,7 @@ export class Month extends Component {
                     <div>
                         <span className="txt-lg">{ month }</span>
                         <span>&nbsp;</span>
-                        <span className="txt-sm grey-4">{ this.props.year }</span>
+                        <span className="txt-sm grey-4">{ this.year }</span>
                     </div>
                 </div>
                 { weekdays }
