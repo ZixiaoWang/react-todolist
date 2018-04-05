@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import { FILTER_MEMOS } from '../redux/actions';
 import { connect } from 'react-redux';
-import { MemoList } from '../redux/interface';
+import { MemoList } from '../utils/interface';
 
 interface CellProps {
     date: number;

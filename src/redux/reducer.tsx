@@ -1,14 +1,18 @@
 import { Reducer } from 'redux';
 import { GET_ALL_MEMOS, FILTER_MEMOS } from './actions';
 import { MEMOS } from '../data/events';
-import { Memo, MemoList } from './interface';
+import { Memo, MemoList } from '../utils/interface';
+import { sortByStartTime, filterByMonth } from '../utils/tools';
 
 export function eventsReducers(state: MemoList = [], action: any): MemoList{
 
     switch(action.type) {
+        
+        // 返回所有memo
         case GET_ALL_MEMOS:
             return MEMOS.sort(sortByStartTime);
         
+        // 过滤memo，返回发生在from和to区间的memolist
         case FILTER_MEMOS:
             let from = action.from;
             let to = action.to;
@@ -23,15 +27,5 @@ export function eventsReducers(state: MemoList = [], action: any): MemoList{
         default:
             return state;
     }
-}
 
-function sortByStartTime(pre: Memo, next: Memo): number{
-    return next.startTime - pre.startTime;
-}
-
-function filterByMonth(memo: Memo, from: number, to: number): Memo | undefined {
-    if(memo.startTime >= from && memo.endTime <= to) {
-        return memo;
-    }
-    return undefined;
 }
