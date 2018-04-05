@@ -4,8 +4,6 @@ import { BrowserRouter, Link, Route, Switch, Redirect } from 'react-router-dom'
 
 import { GridPage } from './grid';
 import { ListPage } from './list';
-import { DetailPage } from './detail';
-import { SearchPage } from './search';
 
 export class Home extends Component<{}> {
 
@@ -20,26 +18,6 @@ export class Home extends Component<{}> {
                     <Route path="/list" component={ ListPage } />
                     <Route path="/grid" component={ GridPage } />
                     <Redirect to="/grid" />
-                </Switch>
-            </BrowserRouter>
-        )
-    }
-}
-
-export class AppComponent extends Component {
-
-    constructor(public props: any) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <BrowserRouter>
-                <Switch>
-                    <Route path="/edit/:timestamp" component={ DetailPage } />
-                    <Route path="/search" component={ SearchPage } />
-                    <Route path="/" component={ Home } />
-                    <Redirect to="/" />
                 </Switch>
             </BrowserRouter>
         )
