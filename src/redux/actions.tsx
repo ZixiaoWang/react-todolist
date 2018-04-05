@@ -1,1 +1,8 @@
-export const GET_EVENTS: string = 'GET_EVENTS';
+import { store } from './store';
+
+export const GET_ALL_MEMOS: string = 'GET_EVENTS';
+export const FILTER_MEMOS: string = 'GET_MEMOS';
+
+export function getMemoListOf(month: number) {
+    
+}

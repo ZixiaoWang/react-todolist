@@ -1,4 +1,4 @@
-export const EVENTS = [
+export const MEMOS = [
     {
       "id": 0,
       "guid": "5ac607db75e1d95afc766a77",

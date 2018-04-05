@@ -1,6 +1,4 @@
-export interface Action {
-    type: string
-}
+export interface ActionBase { type: string };
 
 export interface Memo {
     id: number,

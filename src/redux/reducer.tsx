@@ -1,19 +1,38 @@
 import { Reducer } from 'redux';
-import { GET_EVENTS } from './actions';
-import { EVENTS } from '../data/events';
-import { Action, Memo, MemoList } from './interface';
+import { GET_ALL_MEMOS, FILTER_MEMOS } from './actions';
+import { MEMOS } from '../data/events';
+import { Memo, MemoList } from './interface';
 
-export function eventsReducers(state: MemoList = [], action: Action): MemoList{
+export function eventsReducers(state: MemoList = [], action: any): MemoList{
 
     switch(action.type) {
-        case GET_EVENTS:
-            return EVENTS.sort(byStartTime);
+        case GET_ALL_MEMOS:
+            return MEMOS.sort(sortByStartTime);
         
+        case FILTER_MEMOS:
+            let from = action.from;
+            let to = action.to;
+            return MEMOS
+                    .filter((memo: Memo) => {
+                        let m = filterByMonth(memo, from, to);
+                        if(m !== undefined) {
+                            return m;
+                        }
+                    })
+                    .sort(sortByStartTime);
+
         default:
             return state;
     }
 }
 
-function byStartTime(pre: Memo, next: Memo): number{
+function sortByStartTime(pre: Memo, next: Memo): number{
     return next.startTime - pre.startTime;
+}
+
+function filterByMonth(memo: Memo, from: number, to: number): Memo | undefined {
+    if(memo.startTime >= from && memo.endTime <= to) {
+        return memo;
+    }
+    return undefined;
 }
