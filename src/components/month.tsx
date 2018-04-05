@@ -16,10 +16,6 @@ class Cell extends Component {
         super(props);
     }
 
-    componentDidMount() {
-        console.log(this.props.memos);
-    }
-
     getCellClass(): string {
         let className = 'cell';
         if(this.props.inactive) {
