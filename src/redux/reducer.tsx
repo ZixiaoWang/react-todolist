@@ -12,14 +12,13 @@ export function eventsReducers(state: MemoList = [], action: any): MemoList{
         case FILTER_MEMOS:
             let from = action.from;
             let to = action.to;
-            return MEMOS
-                    .filter((memo: Memo) => {
-                        let m = filterByMonth(memo, from, to);
-                        if(m !== undefined) {
-                            return m;
-                        }
-                    })
-                    .sort(sortByStartTime);
+            let memos =  MEMOS.filter((memo: Memo) => {
+                            let m = filterByMonth(memo, from, to);
+                            if(m !== undefined) {
+                                return m;
+                            }
+                        }).sort(sortByStartTime);
+            return memos;
 
         default:
             return state;

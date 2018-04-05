@@ -1,5 +1,8 @@
 import * as React from 'react';
 import { Component } from 'react';
+import { FILTER_MEMOS } from '../redux/actions';
+import { connect } from 'react-redux';
+import { MemoList } from '../redux/interface';
 
 interface CellProps {
     date: number;
@@ -7,10 +10,14 @@ interface CellProps {
     events: Array<{ type: string }>
 }
 
-export class Cell extends Component {
+class Cell extends Component {
 
     constructor(public props: any) {
         super(props);
+    }
+
+    componentDidMount() {
+        console.log(this.props.memos);
     }
 
     getCellClass(): string {
@@ -23,9 +30,9 @@ export class Cell extends Component {
 
     renderEventList(): JSX.Element {
         return (
-            this.props.events.map((event: any) => {
+            this.props.events.map((event: any, index: number) => {
                 let classList = 'cell-event ' + event.type;
-                return <div className={ classList }></div>
+                return <div key={ index } className={ classList }></div>
             })
         );
     }
@@ -41,7 +48,7 @@ export class Cell extends Component {
 
 }
 
-export class Month extends Component {
+class Month extends Component {
 
     public state: any;
     private months: any = {
@@ -65,6 +72,12 @@ export class Month extends Component {
         let date = new Date();
         this.year = this.props.year || date.getFullYear();
         this.month = this.props.month || date.getMonth();
+    }
+
+    componentDidMount() {
+        let from = new Date(this.year, 0).getTime();
+        let to = new Date(this.year, 11).getTime();
+        this.props.filterMemo(from, to);
     }
 
     renderHeader(): JSX.Element {
@@ -92,10 +105,11 @@ export class Month extends Component {
     renderCalendar(): JSX.Element{
 
         let cells = [];
+        let memos = this.props.memos || [];
 
         for(let i=1; i<=35; i++) {
             cells.push(
-                <Cell key={i} date={i} inactive={false} events={[]}></Cell>
+                <Cell key={i} date={i} inactive={false} events={ [] }></Cell>
             )
         }
 
@@ -116,3 +130,26 @@ export class Month extends Component {
     }
 
 }
+
+function mapStateToProps(state: MemoList, props: any) {
+    return {
+        memos: state
+    }
+}
+
+function mapDispatchToProps(dispatch: any) {
+    return {
+        filterMemo: function(from: number ,to: number){
+            dispatch({
+                type: FILTER_MEMOS,
+                from: from,
+                to: to
+            })
+        }
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Month);
