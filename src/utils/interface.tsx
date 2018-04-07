@@ -7,6 +7,7 @@ export interface Memo {
     startTime: number,
     endTime: number,
     location?: string,
+    color: string,
     url?: string,
     notes?: string
 }

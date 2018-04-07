@@ -1,35 +1,46 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Memo } from '../utils/interface';
+import { Memo, MemoList } from '../utils/interface';
 import { GET_ALL_MEMOS } from '../redux/actions';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { classifyIntoDays } from '../utils/tools';
 
 export interface ListItemProps {
-    event: Memo
+    events: MemoList
 }
 
 export class ListItem extends Component {
 
-    private event: Memo;
-
     constructor(public props: ListItemProps) {
         super(props);
-        this.event = this.props.event;
+    }
+
+    renderMemos(): JSX.Element[]{
+        let memoMap = this.props.events;
+        return this.props.events.map((memo: Memo, index: number) => {
+            let eventClass = "event " + memo.color;
+            let time = new Date(memo.startTime);
+            let starttime: string = time.toTimeString().substring(0, 5);
+
+            return (
+                <div className={ eventClass } key={ index }>
+                    <div className="event-time">
+                        <div className="txt-md">{ starttime }</div>
+                    </div>
+                    <div className="event-detail">
+                        <div className="txt-md">{ memo.title }</div>
+                        <div className="txt sm grey-4">{ memo.notes }</div>
+                    </div>
+                </div>
+            )
+        })
     }
 
     render() {
         return (
             <div className="list-item">
-                <div className="event">
-                    <div className="event-time">
-                        <div className="txt-md">{ this.event.startTime }</div>
-                    </div>
-                    <div className="event-detail">
-                        <div className="txt-md">{ this.event.title }</div>
-                        <div className="txt sm grey-4">{ this.event.notes }</div>
-                    </div>
-                </div>
+                { this.renderMemos() }
             </div>
         )
     }
@@ -45,9 +56,10 @@ class List extends Component {
     }
 
     renderList(): JSX.Element {
-        let memoList = this.props.events || [];
-        let memoViewList = memoList.map((event: Memo, key: number) => {
-            return <ListItem event={ event } key={ key } />
+        let memoList = this.props.events || new Map();
+        let memoViewList: JSX.Element[] = [];
+        memoList.forEach((events: MemoList, day: number) => {
+            memoViewList.push( <ListItem events={ events } key={ day } /> );
         });
         
         return (
@@ -77,7 +89,7 @@ class List extends Component {
 
 function mapStateToProps(state: any) {
     return {
-        events: state
+        events: classifyIntoDays(state)
     }
 }
 

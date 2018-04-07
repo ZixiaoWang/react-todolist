@@ -19,7 +19,7 @@ export function classifyIntoDays(memolist: MemoList): Map<number, MemoList> {
     let map = new Map<number, MemoList>();
 
     memolist.forEach((memo: Memo) => {
-        let day = T.whichdays(memo.startTime);
+        let day = whichdays(memo.startTime);
 
         if(map.has(day) === false) {
             map.set(day, []);
@@ -34,6 +34,8 @@ export function classifyIntoDays(memolist: MemoList): Map<number, MemoList> {
 
 export function whichdays(timestamp: number): number {
     let date = new Date(timestamp).getTime();
-    let day = date - date % 86400000;
+    let day = date - date % MILLIONSECOND_PER_DAY;
     return day;
 }
+
+export const MILLIONSECOND_PER_DAY: number = 8640000;

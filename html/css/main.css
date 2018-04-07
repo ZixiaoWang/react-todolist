@@ -60,7 +60,7 @@ header{
 /* LIST */
 .list-container{
     width: 100%;
-    height: 100%;
+    overflow-y: auto;
     display: grid;
     grid-template-rows: auto 1fr;
     background-color: #efedec;
