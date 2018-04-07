@@ -34,5 +34,5 @@ export class AppComponent extends Component {
 
 render(
     <AppComponent />,
-    document.body
+    document.getElementById('root')
 );

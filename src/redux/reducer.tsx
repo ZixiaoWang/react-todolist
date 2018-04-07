@@ -2,7 +2,7 @@ import { Reducer } from 'redux';
 import { GET_ALL_MEMOS, FILTER_MEMOS } from './actions';
 import { MEMOS } from '../data/events';
 import { Memo, MemoList } from '../utils/interface';
-import { sortByStartTime, filterByMonth } from '../utils/tools';
+import { sortByStartTime, findMemosBetween } from '../utils/tools';
 
 export function eventsReducers(state: MemoList = [], action: any): MemoList{
 
@@ -17,7 +17,7 @@ export function eventsReducers(state: MemoList = [], action: any): MemoList{
             let from = action.from;
             let to = action.to;
             let memos =  MEMOS.filter((memo: Memo) => {
-                            let m = filterByMonth(memo, from, to);
+                            let m = findMemosBetween(memo, from, to);
                             if(m !== undefined) {
                                 return m;
                             }

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 
 import { Nav } from '../components/nav';
-import { List } from '../components/list';
+import List from '../components/list';
 
 export class ListPage extends Component {
 

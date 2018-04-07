@@ -1,14 +1,17 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { memo } from '../utils/memo.interface';
+import { Memo } from '../utils/interface';
+import { GET_ALL_MEMOS } from '../redux/actions';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
 
 export interface ListItemProps {
-    event: memo
+    event: Memo
 }
 
 export class ListItem extends Component {
 
-    private event: memo;
+    private event: Memo;
 
     constructor(public props: ListItemProps) {
         super(props);
@@ -32,9 +35,8 @@ export class ListItem extends Component {
     }
 }
 
-export class List extends Component {
+class List extends Component {
 
-    private events: memo[] = [];
     private month: string = '--';
     private year: string = '--';
 
@@ -43,15 +45,20 @@ export class List extends Component {
     }
 
     renderList(): JSX.Element {
-        let eventList = this.events.map((event, key) => {
+        let memoList = this.props.events || [];
+        let memoViewList = memoList.map((event: Memo, key: number) => {
             return <ListItem event={ event } key={ key } />
         });
         
         return (
             <div className="list-body">
-                { eventList }
+                { memoViewList }
             </div>
         )
+    }
+
+    componentDidMount() {
+        this.props.getAllMemos();
     }
 
     render() {
@@ -67,3 +74,22 @@ export class List extends Component {
         )
     }
 }
+
+function mapStateToProps(state: any) {
+    return {
+        events: state
+    }
+}
+
+function mapDispatchToProps(dispatch: any) {
+    return {
+        getAllMemos: () => {
+            return dispatch({ type: GET_ALL_MEMOS });
+        }
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(List)
