@@ -17,6 +17,18 @@ class DB {
         return this.map.has(guid);
     }
 
+    findBetween(from: number, to: number): MemoList{
+        let list: MemoList = [];
+
+        this.memolist.forEach((memo) => {
+            if(memo.startTime >= from && memo.endTime <= to) {
+                list.push(memo);
+            }
+        });
+
+        return list;
+    }
+
     selectAll(): MemoList {
         return this.memolist;
     }

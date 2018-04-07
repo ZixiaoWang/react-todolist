@@ -2,7 +2,8 @@ import * as React from 'react';
 import { Component } from 'react';
 import { FILTER_MEMOS } from '../redux/actions';
 import { connect } from 'react-redux';
-import { MemoList } from '../utils/interface';
+import { MemoList, Memo } from '../utils/interface';
+import { db } from '../data/db';
 
 interface CellProps {
     date: number;
@@ -26,9 +27,9 @@ class Cell extends Component {
 
     renderEventList(): JSX.Element {
         return (
-            this.props.events.map((event: any, index: number) => {
-                let classList = 'cell-event ' + event.type;
-                return <div key={ index } className={ classList }></div>
+            this.props.events.map((event: Memo, index: number) => {
+                let memoColor = 'cell-event ' + event.color;
+                return <div key={ index } className={ memoColor }></div>
             })
         );
     }
@@ -48,12 +49,12 @@ class Month extends Component {
 
     public state: any;
     private months: any = {
-        "1": 'Jan', "2": 'Feb',
-        "3": 'Mar', "4": 'Apr',
-        "5": 'May', "6": 'Jun',
-        "7": 'Jul', "8": 'Aug',
-        "9": 'Sep', "10": 'Oct',
-        "11": 'Nov',"12": 'Dec'
+        "0": 'Jan', "1": 'Feb',
+        "2": 'Mar', "3": 'Apr',
+        "4": 'May', "5": 'Jun',
+        "6": 'Jul', "7": 'Aug',
+        "8": 'Sep', "9": 'Oct',
+        "10": 'Nov',"11": 'Dec'
     }
     private weekdays: string[] = [
         'Sun', 'Mon', 'Tue', 'Wed', 
@@ -110,11 +111,19 @@ class Month extends Component {
 
         for(let i=0; i<35; i++) {
             let day = '';
+            let events: MemoList = [];
+
             if( i >= this.startDate.getDay() && i <= totalDays) {
                 day = (i + 1).toString();
             }
+
+            events = db.findBetween(
+                new Date(this.year, this.month, i).getTime(), 
+                new Date(this.year, this.month, i+1).getTime()
+            );
+
             cells.push(
-                <Cell key={i} date={ day } inactive={false} events={ [] }></Cell>
+                <Cell key={i} date={ day } inactive={false} events={ events }></Cell>
             )
         }
 
