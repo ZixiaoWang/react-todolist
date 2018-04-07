@@ -5,6 +5,7 @@ import { GET_ALL_MEMOS } from '../redux/actions';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { classifyIntoDays } from '../utils/tools';
+import { Link } from 'react-router-dom';
 
 export interface ListItemProps {
     events: MemoList
@@ -16,6 +17,17 @@ export class ListItem extends Component {
         super(props);
     }
 
+    cutNotes(notes: string | undefined): string{
+        let maxLength = 110;
+        if(notes && notes.length > maxLength ) {
+            return notes.substring(0, maxLength) + '...';
+        } else if (notes && notes.length <= maxLength) {
+            return notes;
+        } else {
+            return '';
+        }
+    }
+
     renderMemos(): JSX.Element[]{
         let memoMap = this.props.events;
         return this.props.events.map((memo: Memo, index: number) => {
@@ -24,15 +36,19 @@ export class ListItem extends Component {
             let starttime: string = time.toTimeString().substring(0, 5);
 
             return (
-                <div className={ eventClass } key={ index }>
-                    <div className="event-time">
-                        <div className="txt-md">{ starttime }</div>
+                <Link to={ "/edit/" + memo.startTime } key={ index }>
+                    <div className={ eventClass }>
+                        <div className="event-time">
+                            <div className="txt-md">{ starttime }</div>
+                        </div>
+                        <div className="event-detail">
+                            <div className="txt-md">{ memo.title }</div>
+                            <div className="txt sm grey-4">
+                                { this.cutNotes(memo.notes) }
+                            </div>
+                        </div>
                     </div>
-                    <div className="event-detail">
-                        <div className="txt-md">{ memo.title }</div>
-                        <div className="txt sm grey-4">{ memo.notes }</div>
-                    </div>
-                </div>
+                </Link>
             )
         })
     }
