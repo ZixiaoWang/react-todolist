@@ -59,8 +59,10 @@ class Month extends Component {
         'Sun', 'Mon', 'Tue', 'Wed', 
         'Thu', 'Fri', 'Sat'
     ];
+    private startDate: Date;
     private year: number;
     private month: number;
+    private startTime: number;
 
     constructor(public props: any) {
         super(props);
@@ -68,6 +70,8 @@ class Month extends Component {
         let date = new Date();
         this.year = this.props.year || date.getFullYear();
         this.month = this.props.month || date.getMonth();
+        this.startDate = new Date(this.year, this.month);
+        this.startTime = this.startDate.getTime();
     }
 
     componentDidMount() {
@@ -102,10 +106,15 @@ class Month extends Component {
 
         let cells = [];
         let memos = this.props.memos || [];
+        let totalDays = (new Date(this.year, this.month+1).getTime() - this.startTime) / ( 1000 * 60 * 60 * 24 );
 
-        for(let i=1; i<=35; i++) {
+        for(let i=0; i<35; i++) {
+            let day = '';
+            if( i >= this.startDate.getDay() && i <= totalDays) {
+                day = (i + 1).toString();
+            }
             cells.push(
-                <Cell key={i} date={i} inactive={false} events={ [] }></Cell>
+                <Cell key={i} date={ day } inactive={false} events={ [] }></Cell>
             )
         }
 

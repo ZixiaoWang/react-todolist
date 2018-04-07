@@ -48,10 +48,14 @@ export class ListItem extends Component {
             let eventClass = "event " + memo.color;
             let time = new Date(memo.startTime);
             let starttime: string = time.toTimeString().substring(0, 5);
+            let year: number = time.getFullYear();
+            let date: string = time.toDateString().substring(4, 10);
 
             return (
                 <div className={ eventClass } key={ index } onClick={ this.gotoDetail.bind(this, memo.guid) }>
                     <div className="event-time">
+                        <div className="txt-ti grey-3">{ year }</div>
+                        <div className="txt-ti grey-3">{ date }</div>
                         <div className="txt-md">{ starttime }</div>
                     </div>
                     <div className="event-detail">
