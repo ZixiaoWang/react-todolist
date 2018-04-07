@@ -40,6 +40,11 @@ export class DetailPage extends Component {
         }
     }
 
+    setColor(color: string) {
+        this.memo.color = color;
+        this.setState({});
+    }
+
     back() {
         history.back();
     }
@@ -93,12 +98,12 @@ export class DetailPage extends Component {
                             <i className="material-icons">palettes</i>
                             <div className="title">Pick a Color</div>
                             <div className="color-palettes">
-                                <div className="color urgent"></div>
-                                <div className="color blue"></div>
-                                <div className="color green"></div>
-                                <div className="color yellow"></div>
-                                <div className="color purple"></div>
-                                <div className="color none"></div>
+                                <div className={ "color urgent" + (this.memo.color === 'urgent' ? ' active' : '') } onClick={ this.setColor.bind(this, 'urgent') }></div>
+                                <div className={ "color blue" + (this.memo.color === 'blue' ? ' active' : '') } onClick={ this.setColor.bind(this, 'blue') }></div>
+                                <div className={ "color green" + (this.memo.color === 'green' ? ' active' : '') } onClick={ this.setColor.bind(this, 'green') }></div>
+                                <div className={ "color yellow" + (this.memo.color === 'yellow' ? ' active' : '') } onClick={ this.setColor.bind(this, 'yellow') }></div>
+                                <div className={ "color purple" + (this.memo.color === 'purple' ? ' active' : '') } onClick={ this.setColor.bind(this, 'purple') }></div>
+                                <div className={ "color none" + (this.memo.color === 'normal' ? ' active' : '') } onClick={ this.setColor.bind(this, 'normal') }></div>
                             </div>
                         </div>{/* Colors */}
                         <div className="input-row">
