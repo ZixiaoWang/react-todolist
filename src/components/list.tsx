@@ -17,15 +17,25 @@ export class ListItem extends Component {
         super(props);
     }
 
-    cutNotes(notes: string | undefined): string{
-        let maxLength = 110;
-        if(notes && notes.length > maxLength ) {
-            return notes.substring(0, maxLength) + '...';
-        } else if (notes && notes.length <= maxLength) {
-            return notes;
-        } else {
-            return '';
+    cutString(notes: string | undefined, length?: number): string{
+        let maxLength = length || 110;
+        let output = [];
+
+        if(typeof notes === 'string') {
+            let words = notes.split(' ');
+            for(let i=0; i<words.length; i++){
+                let word = words[i];
+                if(maxLength - (word.length + 1) >= 0) {
+                    output.push(word);
+                    maxLength -= word.length + 1;
+                    continue;
+                } else {
+                    break;
+                }
+            }
         }
+
+        return output.join(' ') + '...';
     }
 
     renderMemos(): JSX.Element[]{
@@ -42,9 +52,9 @@ export class ListItem extends Component {
                             <div className="txt-md">{ starttime }</div>
                         </div>
                         <div className="event-detail">
-                            <div className="txt-md">{ memo.title }</div>
+                            <div className="txt-md">{ this.cutString(memo.title, 38) }</div>
                             <div className="txt sm grey-4">
-                                { this.cutNotes(memo.notes) }
+                                { this.cutString(memo.notes) }
                             </div>
                         </div>
                     </div>
