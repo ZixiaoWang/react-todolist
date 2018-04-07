@@ -38,4 +38,18 @@ export function whichdays(timestamp: number): number {
     return day;
 }
 
+export function guid() {
+    function s4() {
+        return Math.floor((Math.random()) * 0x10000)
+        .toString(16)
+        .split('.')[0];
+    }
+    return [s4(), s4(), s4(), s4(), s4(), s4()].join('');
+}
+
+export function timestampToTime(timestamp: number): string {
+    let date = new Date(timestamp);
+    return date.toTimeString().substring(0,5);
+}
+
 export const MILLIONSECOND_PER_DAY: number = 8640000;

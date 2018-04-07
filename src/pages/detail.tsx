@@ -1,14 +1,29 @@
 import * as React from 'react';
 import { Component } from 'react';
-import {  } from 'react-router-dom';
+import { Memo } from '../utils/interface';
+import { db } from '../data/db';
+import { guid, timestampToTime } from '../utils/tools';
+
+const emptyMemo: Memo = {
+    guid: guid(),
+    title: '',
+    startTime: Date.now(),
+    endTime: Date.now() + 1000 * 60 * 60,
+    location: '',
+    url: '',
+    color: 'normal',
+    notes: ''
+
+}
 
 export class DetailPage extends Component {
 
-    private timestamp: number;
+    private guid: string;
+    private memo: Memo = emptyMemo;
 
     constructor(public props: any) {
         super(props);
-        this.timestamp = this.props.match.params.timestamp || Date.now();
+        this.guid = this.props.match.params.guid || 'new';
     }
 
     componentWillMount() {
@@ -17,7 +32,11 @@ export class DetailPage extends Component {
         let regex = new RegExp(protocol + '//' + host + '/(grid|list)');
 
         if(regex.test(document.referrer) === false) {
-            location.replace('/grid');
+            location.replace('/list');
+        }
+
+        if(this.guid !== 'new' && db.has(this.guid)) {
+            this.memo = db.query(this.guid) as Memo;
         }
     }
 
@@ -48,27 +67,27 @@ export class DetailPage extends Component {
                         <div className="input-row">
                             <i className="material-icons">title</i>
                             <div className="title">Theme</div>
-                            <input type="text" className="input" placeholder="New Event"/>
+                            <input type="text" className="input" placeholder="New Event" defaultValue={ this.memo.title }/>
                         </div>{/* Title */}
                         <div className="half-col">
                             <i className="material-icons">timer</i>
                             <div className="title">Start Time</div>
-                            <input type="time" className="input"/>
+                            <input type="time" className="input" defaultValue={ timestampToTime(this.memo.startTime) }/>
                         </div>{/* Start Time */}
                         <div className="half-col">
                             <i className="material-icons">timer_off</i>
                             <div className="title">End Time</div>
-                            <input type="time" className="input"/>
+                            <input type="time" className="input" defaultValue={ timestampToTime(this.memo.endTime) } />
                         </div>{/* End Time */}
                         <div className="input-row">
                             <i className="material-icons">location_on</i>
                             <div className="title">Location (if any)</div>
-                            <input type="text" className="input"/>
+                            <input type="text" className="input" defaultValue={ this.memo.location } />
                         </div>{/* Location */}
                         <div className="input-row">
                             <i className="material-icons">network_wifi</i>
                             <div className="title">URL (if any)</div>
-                            <input type="text" className="input"/>
+                            <input type="text" className="input" defaultValue={ this.memo.url } />
                         </div>{/* URL */}
                         <div className="input-row">
                             <i className="material-icons">palettes</i>
@@ -85,7 +104,7 @@ export class DetailPage extends Component {
                         <div className="input-row">
                             <i className="material-icons">note_add</i>
                             <div className="title">Notes</div>
-                            <textarea className="input"></textarea>
+                            <textarea className="input" defaultValue={ this.memo.notes }></textarea>
                         </div>{/* URL */}
                     </div>
                 </div>

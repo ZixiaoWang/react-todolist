@@ -21,7 +21,7 @@ export class AppComponent extends Component {
         <Provider store={ store }>
             <BrowserRouter>
                 <Switch>
-                    <Route path="/edit/:timestamp" component={ DetailPage } />
+                    <Route path="/edit/:guid" component={ DetailPage } />
                     <Route path="/search" component={ SearchPage } />
                     <Route path="/" component={ Home } />
                     <Redirect to="/" />

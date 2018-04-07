@@ -38,6 +38,10 @@ export class ListItem extends Component {
         return output.join(' ') + '...';
     }
 
+    gotoDetail(guid: string) {
+        location.href = '/edit/' + guid;
+    }
+
     renderMemos(): JSX.Element[]{
         let memoMap = this.props.events;
         return this.props.events.map((memo: Memo, index: number) => {
@@ -46,19 +50,17 @@ export class ListItem extends Component {
             let starttime: string = time.toTimeString().substring(0, 5);
 
             return (
-                <Link to={ "/edit/" + memo.startTime } key={ index }>
-                    <div className={ eventClass }>
-                        <div className="event-time">
-                            <div className="txt-md">{ starttime }</div>
-                        </div>
-                        <div className="event-detail">
-                            <div className="txt-md">{ this.cutString(memo.title, 38) }</div>
-                            <div className="txt sm grey-4">
-                                { this.cutString(memo.notes) }
-                            </div>
+                <div className={ eventClass } key={ index } onClick={ this.gotoDetail.bind(this, memo.guid) }>
+                    <div className="event-time">
+                        <div className="txt-md">{ starttime }</div>
+                    </div>
+                    <div className="event-detail">
+                        <div className="txt-md">{ this.cutString(memo.title, 38) }</div>
+                        <div className="txt sm grey-4">
+                            { this.cutString(memo.notes) }
                         </div>
                     </div>
-                </Link>
+                </div>
             )
         })
     }
@@ -102,11 +104,13 @@ class List extends Component {
     render() {
         return (
             <div className="list-container">
-                <div className="list-header">
-                    <span>
-                        { this.month } &nbsp; { this.year }
-                    </span>
-                </div>
+                {/* 
+                    <div className="list-header">
+                        <span>
+                            { this.month } &nbsp; { this.year }
+                        </span>
+                    </div> 
+                */}
                 { this.renderList() }
             </div>
         )

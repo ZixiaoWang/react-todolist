@@ -1,7 +1,6 @@
 export interface ActionBase { type: string };
 
 export interface Memo {
-    id: number,
     guid: string,
     title: string,
     startTime: number,

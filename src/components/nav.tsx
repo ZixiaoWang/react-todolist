@@ -81,8 +81,7 @@ export class Nav extends Component {
     }
 
     gotoEditPage(): void {
-        let timestamp = Date.now();
-        let href = '/edit/' + timestamp.toString();
+        let href = '/edit/new';
         location.href = href;
     }
 

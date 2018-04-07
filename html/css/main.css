@@ -204,13 +204,18 @@ header{
     padding: 10px 0px 0px 0px;
     margin: 0px;
     height: auto;
+    display: flex;
+    align-items: center;
 }
 .color-palettes > .color {
     width: 30px; 
     height: 30px;
     display: inline-block;
-    border-radius: 15px;
+    border-radius: 50%;
     margin-right: 15px;
+}
+.color-palettes > .color.active {
+    border: 5px solid #333;
 }
 .color.urgent{ background-color: var(--urgent) }
 .color.blue{ background-color: var(--blue) }
@@ -224,6 +229,6 @@ header{
 }
 .form > .half-col { grid-column: auto;  }
 .form > .input-row > textarea.input {
-    min-height: 100px;
+    min-height: 300px;
     padding: 10px;
 }
