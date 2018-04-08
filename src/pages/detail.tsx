@@ -23,7 +23,7 @@ export class DetailPage extends Component {
 
     constructor(public props: any) {
         super(props);
-        this.guid = this.props.match.params.guid || 'new';
+        this.guid = this.props.guid || guid();
     }
 
     componentWillMount() {
@@ -49,6 +49,12 @@ export class DetailPage extends Component {
         history.back();
     }
 
+    save() {
+        if( this.props.action(this.memo, this.guid) ) {
+            alert('Successfully Saved');
+        }
+    }
+
     render() {
         return (
             <div id="app">
@@ -61,6 +67,7 @@ export class DetailPage extends Component {
                                 <span className="header-btn txt-lg">Back</span>
                             </div>
                             <div className="header-btn-group">
+                                <i className="header-btn material-icons" onClick={ this.save.bind(this) } >save</i>
                                 <i className="header-btn material-icons">delete</i>
                             </div>
                         </div>

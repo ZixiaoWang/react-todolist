@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
+import { guid } from '../utils/tools';
 
 export class Logo extends Component {
     
@@ -81,7 +82,7 @@ export class Nav extends Component {
     }
 
     gotoEditPage(): void {
-        let href = '/edit/new';
+        let href = '/new/' + guid();
         location.href = href;
     }
 
