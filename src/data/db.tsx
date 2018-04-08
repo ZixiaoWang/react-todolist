@@ -21,7 +21,7 @@ class DB {
         let list: MemoList = [];
 
         this.memolist.forEach((memo) => {
-            if(memo.startTime >= from && memo.endTime <= to) {
+            if(memo.startTime >= from && memo.startTime <= to) {
                 list.push(memo);
             }
         });

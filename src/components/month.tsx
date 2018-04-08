@@ -18,7 +18,7 @@ class Cell extends Component {
 
     getCellClass(): string {
         let className = 'cell';
-        if(this.props.inactive) {
+        if(this.props.status === false) {
             className += ' inactive';
         }
         return className;
@@ -131,22 +131,24 @@ class Month extends Component {
         let cells = [];
         let memos = this.state.memos || [];
         let totalDays = (new Date(this.year, this.month+1).getTime() - this.startTime) / ( 1000 * 60 * 60 * 24 );
+        let startDay = this.startDate.getDay();
 
-        for(let i=0; i<35; i++) {
+        for(let i=0; i<42; i++) {
             let day = '';
             let events: MemoList = [];
+            let active: boolean = false;
 
-            if( i >= this.startDate.getDay() && i <= totalDays) {
-                day = (i - this.startDate.getDay() + 1).toString();
+            if( i >= startDay && i < totalDays + startDay) {
+                day = (i - startDay + 1).toString();
+                active = true;
+                events = db.findBetween(
+                    new Date(this.year, this.month, i).getTime(), 
+                    new Date(this.year, this.month, i+1).getTime()
+                );
             }
 
-            events = db.findBetween(
-                new Date(this.year, this.month, i).getTime(), 
-                new Date(this.year, this.month, i+1).getTime()
-            );
-
             cells.push(
-                <Cell key={i} date={ day } inactive={false} events={ events }></Cell>
+                <Cell key={i} date={ day } status={ active } events={ events }></Cell>
             )
         }
 
@@ -167,15 +169,17 @@ class Month extends Component {
     }
 
     private setDate(props: any) {
-        this.year = props.year || this.year;
-        this.month = props.month || this.month;
-        this.startDate = new Date(this.year, this.month);
+        let year = props.year === undefined ?  this.year : props.year;
+        let month = props.month === undefined ? this.month : props.month;
+        this.startDate = new Date(year, month);
+        this.year = this.startDate.getFullYear();
+        this.month = this.startDate.getMonth();
         this.startTime = this.startDate.getTime();
     }
 
     private updateMemoList() {
-        let from = new Date(this.year, 0).getTime();
-        let to = new Date(this.year, 11).getTime();
+        let from = this.startTime;
+        let to = new Date(this.year, this.month + 1).getTime();
         this.state.memos = db.findBetween(from ,to);
         console.log(this.state.memos);
     }
