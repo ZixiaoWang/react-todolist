@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { guid } from '../utils/tools';
+import { history } from '../data/history';
 
 export class Logo extends Component {
     
@@ -70,7 +71,7 @@ export class Nav extends Component {
     }
 
     gotoSearch(): void {
-        location.href = '/search';
+        history.push('/search');
     }
 
     toggleView(): void {
@@ -78,12 +79,12 @@ export class Nav extends Component {
         if(this.icon === 'view_module') {
             href = '/grid';
         }
-        location.href = href;
+        history.push(href);
     }
 
     gotoEditPage(): void {
         let href = '/new/' + guid();
-        location.href = href;
+        history.push(href);
     }
 
     render() {

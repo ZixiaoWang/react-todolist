@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { Memo, MemoList } from '../utils/interface';
-import { GET_ALL_MEMOS } from '../redux/actions';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { classifyIntoDays } from '../utils/tools';
 import { Link } from 'react-router-dom';
+import { db } from '../data/db';
+import { history } from '../data/history';
 
 export interface ListItemProps {
     events: MemoList
@@ -39,7 +40,7 @@ export class ListItem extends Component {
     }
 
     gotoDetail(guid: string) {
-        location.href = '/edit/' + guid;
+        history.push('/edit/' + guid)
     }
 
     renderMemos(): JSX.Element[]{
@@ -78,17 +79,18 @@ export class ListItem extends Component {
     }
 }
 
-class List extends Component {
+export default class List extends Component {
 
     private month: string = '--';
     private year: string = '--';
+    public state: any = { memoList: new Map() }
 
     constructor(public props: any) {
         super(props);
     }
 
     renderList(): JSX.Element {
-        let memoList = this.props.memoList || new Map();
+        let memoList = this.state.memoList || new Map();
         let memoViewList: JSX.Element[] = [];
         memoList.forEach((events: MemoList, day: number) => {
             memoViewList.push( <ListItem events={ events } key={ day } /> );
@@ -102,7 +104,8 @@ class List extends Component {
     }
 
     componentDidMount() {
-        this.props.getAllMemos();
+        let memoList = classifyIntoDays(db.selectAll());
+        this.setState({ memoList: memoList });
     }
 
     render() {
@@ -120,22 +123,3 @@ class List extends Component {
         )
     }
 }
-
-function mapStateToProps(state: any) {
-    return {
-        memoList: classifyIntoDays(state.memosReducers)
-    }
-}
-
-function mapDispatchToProps(dispatch: any) {
-    return {
-        getAllMemos: () => {
-            return dispatch({ type: GET_ALL_MEMOS });
-        }
-    }
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(List)

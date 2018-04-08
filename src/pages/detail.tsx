@@ -3,6 +3,7 @@ import { Component } from 'react';
 import { Memo } from '../utils/interface';
 import { db } from '../data/db';
 import { guid, timestampToTime } from '../utils/tools';
+import { history } from '../data/history';
 
 const emptyMemo: Memo = {
     guid: guid(),
@@ -45,11 +46,17 @@ export class DetailPage extends Component {
         this.setState({});
     }
 
+    setValue(event: Event) {
+        let name = event.target.name;
+        this.memo[name] = event.target.value;
+    }
+
     back() {
-        history.back();
+        history.goBack();
     }
 
     save() {
+        console.log(this.memo);
         if( this.props.action(this.memo, this.guid) ) {
             alert('Successfully Saved');
         }
@@ -79,27 +86,42 @@ export class DetailPage extends Component {
                         <div className="input-row">
                             <i className="material-icons">title</i>
                             <div className="title">Theme</div>
-                            <input type="text" className="input" placeholder="New Event" defaultValue={ this.memo.title }/>
+                            <input name="title" type="text" 
+                                className="input" placeholder="New Event" 
+                                onChange={ this.setValue.bind(this) }
+                                defaultValue={ this.memo.title }/>
                         </div>{/* Title */}
                         <div className="half-col">
                             <i className="material-icons">timer</i>
                             <div className="title">Start Time</div>
-                            <input type="time" className="input" defaultValue={ timestampToTime(this.memo.startTime) }/>
+                            <input name="startTime" type="time" 
+                                className="input" 
+                                onChange={ this.setValue.bind(this) }
+                                defaultValue={ timestampToTime(this.memo.startTime) }/>
                         </div>{/* Start Time */}
                         <div className="half-col">
                             <i className="material-icons">timer_off</i>
                             <div className="title">End Time</div>
-                            <input type="time" className="input" defaultValue={ timestampToTime(this.memo.endTime) } />
+                            <input name="endTime" type="time" 
+                                className="input" 
+                                onChange={ this.setValue.bind(this) }
+                                defaultValue={ timestampToTime(this.memo.endTime) } />
                         </div>{/* End Time */}
                         <div className="input-row">
                             <i className="material-icons">location_on</i>
                             <div className="title">Location (if any)</div>
-                            <input type="text" className="input" defaultValue={ this.memo.location } />
+                            <input name="location" type="text" 
+                                className="input" 
+                                onChange={ this.setValue.bind(this) }
+                                defaultValue={ this.memo.location } />
                         </div>{/* Location */}
                         <div className="input-row">
                             <i className="material-icons">network_wifi</i>
                             <div className="title">URL (if any)</div>
-                            <input type="text" className="input" defaultValue={ this.memo.url } />
+                            <input name="url" type="text" 
+                                className="input" 
+                                onChange={ this.setValue.bind(this) }
+                                defaultValue={ this.memo.url } />
                         </div>{/* URL */}
                         <div className="input-row">
                             <i className="material-icons">palettes</i>
@@ -116,7 +138,10 @@ export class DetailPage extends Component {
                         <div className="input-row">
                             <i className="material-icons">note_add</i>
                             <div className="title">Notes</div>
-                            <textarea className="input" defaultValue={ this.memo.notes }></textarea>
+                            <textarea name="notes" 
+                                className="input" 
+                                onChange={ this.setValue.bind(this) }
+                                defaultValue={ this.memo.notes }></textarea>
                         </div>{/* URL */}
                     </div>
                 </div>
