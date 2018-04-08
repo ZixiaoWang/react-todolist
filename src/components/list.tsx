@@ -88,7 +88,7 @@ class List extends Component {
     }
 
     renderList(): JSX.Element {
-        let memoList = this.props.events || new Map();
+        let memoList = this.props.memoList || new Map();
         let memoViewList: JSX.Element[] = [];
         memoList.forEach((events: MemoList, day: number) => {
             memoViewList.push( <ListItem events={ events } key={ day } /> );
@@ -123,7 +123,7 @@ class List extends Component {
 
 function mapStateToProps(state: any) {
     return {
-        events: classifyIntoDays(state)
+        memoList: classifyIntoDays(state.memosReducers)
     }
 }
 

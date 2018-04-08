@@ -1,4 +1,8 @@
-import { createStore } from 'redux';
-import { eventsReducers } from './reducer';
+import { createStore, combineReducers } from 'redux';
+import { memosReducers, timeReducers } from './reducer';
 
-export const store = createStore(eventsReducers);
+const reducer = combineReducers({
+    memosReducers: memosReducers,
+    timeReducers: timeReducers
+});
+export const store = createStore(reducer);

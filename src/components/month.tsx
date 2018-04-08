@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { FILTER_MEMOS } from '../redux/actions';
+import { FILTER_MEMOS, CHANGE_MONTH } from '../redux/actions';
 import { connect } from 'react-redux';
 import { MemoList, Memo } from '../utils/interface';
 import { db } from '../data/db';
@@ -10,7 +10,6 @@ interface CellProps {
     inactive: boolean;
     events: Array<{ type: string }>
 }
-
 class Cell extends Component {
 
     constructor(public props: any) {
@@ -45,9 +44,18 @@ class Cell extends Component {
 
 }
 
+
+
+interface MonthStateEx {
+    year: number,
+    month: number,
+    startTime: number,
+    startDate: Date
+}
 class Month extends Component {
 
-    public state: any;
+    public state: any = { memos: [] }
+
     private months: any = {
         "0": 'Jan', "1": 'Feb',
         "2": 'Mar', "3": 'Apr',
@@ -60,26 +68,31 @@ class Month extends Component {
         'Sun', 'Mon', 'Tue', 'Wed', 
         'Thu', 'Fri', 'Sat'
     ];
-    private startDate: Date;
-    private year: number;
-    private month: number;
-    private startTime: number;
+    private startDate: Date = new Date();
+    private year: number = this.startDate.getFullYear();
+    private month: number = this.startDate.getMonth();
+    private startTime: number = this.startDate.getTime()
 
     constructor(public props: any) {
         super(props);
+        this.setDate(this.props);
+        this.updateMemoList();
+    }
 
-        let date = new Date();
-        this.year = this.props.year || date.getFullYear();
-        this.month = this.props.month || date.getMonth();
-        this.startDate = new Date(this.year, this.month);
-        this.startTime = this.startDate.getTime();
+    componentWillUpdate(nextProps: any, nextState: any) {
+        this.setDate(nextProps);
+        this.updateMemoList();
     }
 
     componentDidMount() {
-        let from = new Date(this.year, 0).getTime();
-        let to = new Date(this.year, 11).getTime();
-        this.props.filterMemo(from, to);
+        this.updateMemoList();
     }
+
+    lastMonth() { 
+        let targetMonth = this.month - 1;
+        this.props.toMonth(targetMonth); 
+    }
+    nextMonth() { this.props.toMonth(this.month + 1); }
 
     renderHeader(): JSX.Element {
         
@@ -91,14 +104,24 @@ class Month extends Component {
 
         return (
             <div className="grid-head">
-                <div className="cell full-col month-header">
-                    <div>
-                        <span className="txt-lg">{ month }</span>
-                        <span>&nbsp;</span>
-                        <span className="txt-sm grey-4">{ this.year }</span>
+                <div className="grid-head-month">
+                    <div className="cell month-header" onClick={ this.lastMonth.bind(this) }>
+                        <i className="material-icons txt-lg grey-4">keyboard_arrow_left</i>
+                    </div>
+                    <div className="cell full-col month-header">
+                        <div>
+                            <span className="txt-lg">{ month }</span>
+                            <span>&nbsp;</span>
+                            <span className="txt-sm grey-4">{ this.year }</span>
+                        </div>
+                    </div>
+                    <div className="cell month-header" onClick={ this.nextMonth.bind(this) }>
+                        <i className="material-icons txt-lg grey-4">keyboard_arrow_right</i>
                     </div>
                 </div>
-                { weekdays }
+                <div className="grid-head-weeks">
+                    { weekdays }
+                </div>
             </div>
         )
     }
@@ -106,7 +129,7 @@ class Month extends Component {
     renderCalendar(): JSX.Element{
 
         let cells = [];
-        let memos = this.props.memos || [];
+        let memos = this.state.memos || [];
         let totalDays = (new Date(this.year, this.month+1).getTime() - this.startTime) / ( 1000 * 60 * 60 * 24 );
 
         for(let i=0; i<35; i++) {
@@ -114,7 +137,7 @@ class Month extends Component {
             let events: MemoList = [];
 
             if( i >= this.startDate.getDay() && i <= totalDays) {
-                day = (i + 1).toString();
+                day = (i - this.startDate.getDay() + 1).toString();
             }
 
             events = db.findBetween(
@@ -143,21 +166,38 @@ class Month extends Component {
         )
     }
 
+    private setDate(props: any) {
+        this.year = props.year || this.year;
+        this.month = props.month || this.month;
+        this.startDate = new Date(this.year, this.month);
+        this.startTime = this.startDate.getTime();
+    }
+
+    private updateMemoList() {
+        let from = new Date(this.year, 0).getTime();
+        let to = new Date(this.year, 11).getTime();
+        this.state.memos = db.findBetween(from ,to);
+        console.log(this.state.memos);
+    }
+
 }
 
-function mapStateToProps(state: MemoList, props: any) {
+
+
+
+
+function mapStateToProps(state: any, props: any) {
     return {
-        memos: state
+        month: state.timeReducers.month
     }
 }
 
 function mapDispatchToProps(dispatch: any) {
     return {
-        filterMemo: function(from: number ,to: number){
+        toMonth: function(targetMonth: number) {
             dispatch({
-                type: FILTER_MEMOS,
-                from: from,
-                to: to
+                type: CHANGE_MONTH,
+                month: targetMonth
             })
         }
     }

@@ -1,10 +1,10 @@
 import { Reducer } from 'redux';
-import { GET_ALL_MEMOS, FILTER_MEMOS } from './actions';
+import { GET_ALL_MEMOS, FILTER_MEMOS, CHANGE_MONTH } from './actions';
 import { MEMOS } from '../data/events';
 import { Memo, MemoList } from '../utils/interface';
 import { sortByStartTime, findMemosBetween } from '../utils/tools';
 
-export function eventsReducers(state: MemoList = [], action: any): MemoList{
+export function memosReducers(state: MemoList = [], action: any): MemoList{
 
     switch(action.type) {
         
@@ -28,4 +28,17 @@ export function eventsReducers(state: MemoList = [], action: any): MemoList{
             return state;
     }
 
+}
+
+export function timeReducers(state: any = {}, action: any) {
+
+    switch(action.type) {
+
+        case CHANGE_MONTH:
+            return { month: action.month };
+
+        default: 
+            return state;
+
+    }
 }

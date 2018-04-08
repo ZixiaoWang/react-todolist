@@ -125,6 +125,10 @@ header{
 .grid-container > .grid-head {
     display: grid;
     grid-template-rows: repeat(2, auto);
+}
+.grid-container > .grid-head > .grid-head-month,
+.grid-container > .grid-head > .grid-head-weeks {
+    display: grid;
     grid-template-columns: repeat(7, 1fr);
 }
 .grid-container > .grid-body {
@@ -140,10 +144,13 @@ header{
     border-bottom: .5px solid #eee;
 }
 .cell.full-col{
-    grid-column: 1 / span 7;
+    grid-column: 2 / span 5;
 }
 .cell.month-header {
-    padding: 15px 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .cell.inactive{
     background-color: #eee;
