@@ -22,6 +22,12 @@ export class DetailPage extends Component {
     private guid: string;
     private startTime: number;
     private memo: Memo = emptyMemo;
+    private refMap: any = {
+        startDate: null,
+        startTime: null,
+        endDate: null,
+        endTime: null
+    }
 
     constructor(public props: any) {
         super(props);
@@ -57,7 +63,14 @@ export class DetailPage extends Component {
     }
 
     save() {
-        console.log(this.memo);
+        let sd: HTMLInputElement = this.refs.startDate as HTMLInputElement;
+        let st: HTMLInputElement = this.refs.startTime as HTMLInputElement;
+        let ed: HTMLInputElement = this.refs.endDate as HTMLInputElement;
+        let et: HTMLInputElement = this.refs.endTime as HTMLInputElement;
+
+        this.memo.startTime = new Date(sd.value + ' ' + st.value).getTime();
+        this.memo.endTime = new Date(ed.value + ' ' + et.value).getTime();
+
         if( this.props.action(this.memo, this.guid) ) {
             alert('Successfully Saved');
         }
@@ -98,7 +111,7 @@ export class DetailPage extends Component {
                             <div className="title">Start Date</div>
                             <input name="startDate" type="date" id="test"
                                 className="input" 
-                                onChange={ this.setValue.bind(this) }
+                                ref="startDate"
                                 defaultValue={ timestampToDate(this.memo.startTime) }/>
                         </div>{/* Start Time */}
                         <div className="half-col">
@@ -106,7 +119,7 @@ export class DetailPage extends Component {
                             <div className="title">Start Time</div>
                             <input name="startTime" type="time" 
                                 className="input" 
-                                onChange={ this.setValue.bind(this) }
+                                ref="startTime"
                                 defaultValue={ timestampToTime(this.memo.startTime) }/>
                         </div>{/* Start Time */}
 
@@ -115,7 +128,7 @@ export class DetailPage extends Component {
                             <div className="title">End Date</div>
                             <input name="endDate" type="date" 
                                 className="input" 
-                                onChange={ this.setValue.bind(this) }
+                                ref="endDate"
                                 defaultValue={ timestampToDate(this.memo.endTime) }/>
                         </div>{/* Start Time */}
                         <div className="half-col">
@@ -123,7 +136,7 @@ export class DetailPage extends Component {
                             <div className="title">End Time</div>
                             <input name="endTime" type="time" 
                                 className="input" 
-                                onChange={ this.setValue.bind(this) }
+                                ref="endTime"
                                 defaultValue={ timestampToTime(this.memo.endTime) } />
                         </div>{/* End Time */}
 
