@@ -39,8 +39,8 @@ export class ListItem extends Component {
         return output.join(' ') + '...';
     }
 
-    gotoDetail(guid: string) {
-        history.push('/edit/' + guid)
+    gotoDetail(guid: string, startTime: number) {
+        history.push('/edit/' + guid + '/' + startTime);
     }
 
     renderMemos(): JSX.Element[]{
@@ -53,7 +53,7 @@ export class ListItem extends Component {
             let date: string = time.toDateString().substring(4, 10);
 
             return (
-                <div className={ eventClass } key={ index } onClick={ this.gotoDetail.bind(this, memo.guid) }>
+                <div className={ eventClass } key={ index } onClick={ this.gotoDetail.bind(this, memo.guid, memo.startTime) }>
                     <div className="event-time">
                         <div className="txt-ti grey-3">{ year }</div>
                         <div className="txt-ti grey-3">{ date }</div>

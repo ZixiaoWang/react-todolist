@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import { Memo } from '../utils/interface';
 import { db } from '../data/db';
-import { guid, timestampToTime } from '../utils/tools';
+import { guid, timestampToTime, timestampToDate } from '../utils/tools';
 import { history } from '../data/history';
 
 const emptyMemo: Memo = {
@@ -20,10 +20,12 @@ const emptyMemo: Memo = {
 export class DetailPage extends Component {
 
     private guid: string;
+    private startTime: number;
     private memo: Memo = emptyMemo;
 
     constructor(public props: any) {
         super(props);
+        this.startTime = this.props.startTime || this.memo.startTime;
         this.guid = this.props.guid || guid();
     }
 
@@ -31,10 +33,6 @@ export class DetailPage extends Component {
         let protocol = location.protocol;
         let host = location.host;
         let regex = new RegExp(protocol + '//' + host + '/(grid|list)');
-
-        if(regex.test(document.referrer) === false) {
-            location.replace('/list');
-        }
 
         if(this.guid !== 'new' && db.has(this.guid)) {
             this.memo = db.query(this.guid) as Memo;
@@ -94,6 +92,15 @@ export class DetailPage extends Component {
                                 onChange={ this.setValue.bind(this) }
                                 defaultValue={ this.memo.title }/>
                         </div>{/* Title */}
+
+                        <div className="half-col">
+                            <i className="material-icons">timer</i>
+                            <div className="title">Start Date</div>
+                            <input name="startDate" type="date" id="test"
+                                className="input" 
+                                onChange={ this.setValue.bind(this) }
+                                defaultValue={ timestampToDate(this.memo.startTime) }/>
+                        </div>{/* Start Time */}
                         <div className="half-col">
                             <i className="material-icons">timer</i>
                             <div className="title">Start Time</div>
@@ -101,6 +108,15 @@ export class DetailPage extends Component {
                                 className="input" 
                                 onChange={ this.setValue.bind(this) }
                                 defaultValue={ timestampToTime(this.memo.startTime) }/>
+                        </div>{/* Start Time */}
+
+                        <div className="half-col">
+                            <i className="material-icons">timer</i>
+                            <div className="title">End Date</div>
+                            <input name="endDate" type="date" 
+                                className="input" 
+                                onChange={ this.setValue.bind(this) }
+                                defaultValue={ timestampToDate(this.memo.endTime) }/>
                         </div>{/* Start Time */}
                         <div className="half-col">
                             <i className="material-icons">timer_off</i>
@@ -110,6 +126,7 @@ export class DetailPage extends Component {
                                 onChange={ this.setValue.bind(this) }
                                 defaultValue={ timestampToTime(this.memo.endTime) } />
                         </div>{/* End Time */}
+
                         <div className="input-row">
                             <i className="material-icons">location_on</i>
                             <div className="title">Location (if any)</div>

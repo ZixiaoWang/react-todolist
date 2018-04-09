@@ -52,4 +52,9 @@ export function timestampToTime(timestamp: number): string {
     return date.toTimeString().substring(0,5);
 }
 
+export function timestampToDate(timestamp: number): string {
+    let date = new Date(timestamp);
+    return date.toJSON().substring(0, 10);
+}
+
 export const MILLIONSECOND_PER_DAY: number = 8640000;
