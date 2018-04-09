@@ -46,8 +46,11 @@ export class DetailPage extends Component {
         this.setState({});
     }
 
-    setValue(event: Event) {
-        let name = event.target.name;
+    setValue(event: React.ChangeEvent<any>) {
+        let name = event.target.name as keyof Memo;
+        if(name === undefined) {
+            return ;
+        }
         this.memo[name] = event.target.value;
     }
 
@@ -74,7 +77,7 @@ export class DetailPage extends Component {
                                 <span className="header-btn txt-lg">Back</span>
                             </div>
                             <div className="header-btn-group">
-                                <i className="header-btn material-icons" onClick={ this.save.bind(this) } >save</i>
+                                <i className="header-btn material-icons" onClick={ this.save.bind(this) }>save</i>
                                 <i className="header-btn material-icons">delete</i>
                             </div>
                         </div>
