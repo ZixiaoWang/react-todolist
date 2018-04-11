@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { Memo, MemoList } from '../utils/interface';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { classifyIntoDays } from '../utils/tools';
+import { classifyIntoDays, timestampToDate } from '../utils/tools';
 import { Link } from 'react-router-dom';
 import { db } from '../data/db';
 import { history } from '../data/history';
@@ -14,8 +14,11 @@ export interface ListItemProps {
 
 export class ListItem extends Component {
 
+    private theId: string;
+
     constructor(public props: ListItemProps) {
         super(props);
+        this.theId = timestampToDate( this.props.events[0].startTime );
     }
 
     cutString(notes: string | undefined, length?: number): string{
@@ -53,7 +56,8 @@ export class ListItem extends Component {
             let date: string = time.toDateString().substring(4, 10);
 
             return (
-                <div className={ eventClass } key={ index } onClick={ this.gotoDetail.bind(this, memo.guid, memo.startTime) }>
+                <div className={ eventClass } key={ index } 
+                    onClick={ this.gotoDetail.bind(this, memo.guid, memo.startTime) }>
                     <div className="event-time">
                         <div className="txt-ti grey-3">{ year }</div>
                         <div className="txt-ti grey-3">{ date }</div>
@@ -72,7 +76,7 @@ export class ListItem extends Component {
 
     render() {
         return (
-            <div className="list-item">
+            <div className="list-item" id={ this.theId }>
                 { this.renderMemos() }
             </div>
         )
@@ -83,7 +87,7 @@ export default class List extends Component {
 
     private month: string = '--';
     private year: string = '--';
-    public state: any = { memoList: new Map() }
+    public state: any = { memoList: new Map() };
 
     constructor(public props: any) {
         super(props);
@@ -111,13 +115,6 @@ export default class List extends Component {
     render() {
         return (
             <div className="list-container">
-                {/* 
-                    <div className="list-header">
-                        <span>
-                            { this.month } &nbsp; { this.year }
-                        </span>
-                    </div> 
-                */}
                 { this.renderList() }
             </div>
         )

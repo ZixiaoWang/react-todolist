@@ -25,9 +25,10 @@ export class AppComponent extends Component {
             <Router history={ history }>
                 <Switch>
                     <Route path="/edit/:guid" render={({ match }) => <DetailPage guid={ match.params.guid} action={ db.update.bind(db) } />} />
-                    <Route path="/new/:guid" render={({ match }) => <DetailPage guid={ match.params.guid } action={ db.insert.bind(db) } />} />
                     <Route path="/new/:guid/:startTime" render={({ match }) => <DetailPage startTime={ match.params.startTime } guid={ match.params.guid } action={ db.insert.bind(db) } />} />
+                    <Route path="/new/:guid" render={({ match }) => <DetailPage guid={ match.params.guid } action={ db.insert.bind(db) } />} />
                     <Route path="/search" component={ SearchPage } />
+                    <Route path="/list/:date" render={({ match }) => <ListPage hash={ match.params.date }/>} />
                     <Route path="/list" component={ ListPage } />
                     <Route path="/grid" component={ GridPage } />
                     <Redirect to="/grid" />

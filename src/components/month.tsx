@@ -4,6 +4,8 @@ import { FILTER_MEMOS, CHANGE_MONTH } from '../redux/actions';
 import { connect } from 'react-redux';
 import { MemoList, Memo } from '../utils/interface';
 import { db } from '../data/db';
+import { timestampToDate } from '../utils/tools';
+import { history } from '../data/history';
 
 interface CellProps {
     date: number;
@@ -33,10 +35,15 @@ class Cell extends Component {
         );
     }
 
+    gotoList() {
+        let dateString = timestampToDate( this.props.date );
+        history.push(`/list/${ dateString }`);
+    }
+
     render() {
         return (
-            <div className={ this.getCellClass() }>
-                <div className="txt-md">{ this.props.date }</div>
+            <div className={ this.getCellClass() } onClick={ this.gotoList.bind(this) }>
+                <div className="txt-md">{ this.props.day }</div>
                 { this.renderEventList() }
             </div>
         )
@@ -134,21 +141,21 @@ class Month extends Component {
         let startDay = this.startDate.getDay();
 
         for(let i=0; i<42; i++) {
-            let day = '';
+            let currentDay: number = 0;
             let events: MemoList = [];
             let active: boolean = false;
 
             if( i >= startDay && i < totalDays + startDay) {
-                day = (i - startDay + 1).toString();
+                currentDay = (i - startDay + 1);
                 active = true;
                 events = db.findBetween(
-                    new Date(this.year, this.month, i).getTime(), 
-                    new Date(this.year, this.month, i+1).getTime()
+                    new Date(this.year, this.month, currentDay).getTime(), 
+                    new Date(this.year, this.month, currentDay+1).getTime()
                 );
             }
 
             cells.push(
-                <Cell key={i} date={ day } status={ active } events={ events }></Cell>
+                <Cell key={i} date={ new Date(this.year, this.month, currentDay+1) } day={ currentDay } status={ active } events={ events }></Cell>
             )
         }
 
@@ -181,7 +188,6 @@ class Month extends Component {
         let from = this.startTime;
         let to = new Date(this.year, this.month + 1).getTime();
         this.state.memos = db.findBetween(from ,to);
-        console.log(this.state.memos);
     }
 
 }
