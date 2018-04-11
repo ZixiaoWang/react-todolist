@@ -6,7 +6,7 @@ import { history } from '../data/history';
 export class Logo extends Component {
     
     goToHome(): void{
-        location.href = '/grid';
+        history.push('/grid');
     }
 
     render() {
