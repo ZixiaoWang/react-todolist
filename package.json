@@ -22,8 +22,9 @@
     "@types/react-dom": "^16.0.4",
     "@types/react-redux": "^5.0.15",
     "@types/react-router-dom": "^4.2.6",
+    "awesome-typescript-loader": "^5.0.0",
     "css-loader": "^0.28.11",
     "style-loader": "^0.20.3",
-    "ts-loader": "^4.1.0"
+    "ts-loader": "^3.5.0"
   }
 }

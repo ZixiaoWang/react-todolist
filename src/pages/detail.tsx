@@ -113,7 +113,7 @@ export class DetailPage extends Component {
                                 className="input" 
                                 ref="startDate"
                                 defaultValue={ timestampToDate(this.memo.startTime) }/>
-                        </div>{/* Start Time */}
+                        </div>{/* Start Date */}
                         <div className="half-col">
                             <i className="material-icons">timer</i>
                             <div className="title">Start Time</div>
@@ -130,7 +130,7 @@ export class DetailPage extends Component {
                                 className="input" 
                                 ref="endDate"
                                 defaultValue={ timestampToDate(this.memo.endTime) }/>
-                        </div>{/* Start Time */}
+                        </div>{/* End Date */}
                         <div className="half-col">
                             <i className="material-icons">timer_off</i>
                             <div className="title">End Time</div>

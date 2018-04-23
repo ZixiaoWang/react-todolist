@@ -32,6 +32,15 @@ export function classifyIntoDays(memolist: MemoList): Map<number, MemoList> {
     return map;
 }
 
+export function filterByKeyWord(memo: Memo, keyword: string): boolean {
+    let reg = new RegExp(keyword, 'g');
+    let theMemo: Memo = memo || {};
+    return Object.keys(memo).some((key: string, index: number, array: string[]) => {
+        let value = theMemo[key] as string ;
+        return reg.test( value );
+    })
+}
+
 export function whichdays(timestamp: number): number {
     let date = new Date(timestamp).getTime();
     let day = date - date % MILLIONSECOND_PER_DAY;

@@ -8,7 +8,8 @@ export interface Memo {
     location?: string,
     color: string,
     url?: string,
-    notes?: string
+    notes?: string,
+    [key: string]: string | undefined | number
 }
 
 export type MemoList = Array<Memo>

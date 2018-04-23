@@ -1,6 +1,6 @@
 import { MEMOS } from './events';
 import { Memo, MemoList } from '../utils/interface';
-import { guid } from '../utils/tools';
+import { guid, filterByKeyWord } from '../utils/tools';
 
 class DB {
 
@@ -27,6 +27,12 @@ class DB {
         });
 
         return list;
+    }
+
+    search(keyword: string): MemoList {
+        return this.memolist.filter((memo: Memo, index: number) => {
+            return filterByKeyWord(memo, keyword);
+        })
     }
 
     selectAll(): MemoList {
