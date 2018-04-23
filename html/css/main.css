@@ -142,8 +142,8 @@ header{
     display: grid;
     grid-template-rows: 1fr auto;
     padding: 5px;
-    border-right: .5px solid #eee;
-    border-bottom: .5px solid #eee;
+    border-right: .5px solid #ccc;
+    border-bottom: .5px solid #ccc;
 }
 .cell.full-col{
     grid-column: 2 / span 5;

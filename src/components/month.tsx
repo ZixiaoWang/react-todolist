@@ -43,7 +43,7 @@ class Cell extends Component {
     render() {
         return (
             <div className={ this.getCellClass() } onClick={ this.gotoList.bind(this) }>
-                <div className="txt-md">{ this.props.day }</div>
+                <div className="txt-md">{ this.props.day || '' }</div>
                 { this.renderEventList() }
             </div>
         )
